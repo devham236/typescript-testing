@@ -14,7 +14,6 @@ const DataContextProvider = ({ children }) => {
 
     fetchData();
   }, []);
-
   return (
     <DataContext.Provider value={{ recipesData, setRecipesData }}>
       {children}
