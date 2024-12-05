@@ -9,7 +9,7 @@ const DataContextProvider = ({ children }) => {
       const res = await fetch("/data.json");
       const data = await res.json();
 
-      setRecipesData(data);
+      setRecipesData(data.recipes);
     };
 
     fetchData();
