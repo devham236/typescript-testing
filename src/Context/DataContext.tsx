@@ -1,8 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 const DataContext = createContext();
+import { Recipe } from "../Types/dataTypes";
 
 const DataContextProvider = ({ children }) => {
-  const [recipesData, setRecipesData] = useState([]);
+  const [recipesData, setRecipesData] = useState<Recipe[]>([]);
   const [checkoutData, setCheckoutData] = useState([]);
   const [modal, setModal] = useState({
     open: false,
