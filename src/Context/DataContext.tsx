@@ -4,6 +4,10 @@ const DataContext = createContext();
 const DataContextProvider = ({ children }) => {
   const [recipesData, setRecipesData] = useState([]);
   const [checkoutData, setCheckoutData] = useState([]);
+  const [modal, setModal] = useState({
+    open: false,
+    data: null,
+  });
 
   const addToCheckout = (recipe) => {
     if (recipe.id) {
@@ -18,6 +22,18 @@ const DataContextProvider = ({ children }) => {
     }
   };
 
+  const openModal = (recipe) => {
+    if (recipe.id) {
+      setModal({ open: true, data: recipe });
+    }
+  };
+
+  const closeModal = () => {
+    if (modal.open) {
+      setModal((prev) => ({ ...prev, open: false }));
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/data.json");
@@ -28,12 +44,17 @@ const DataContextProvider = ({ children }) => {
 
     fetchData();
   }, []);
+
   return (
     <DataContext.Provider
       value={{
         recipesData,
-        setRecipesData,
         checkoutData,
+        modal,
+        closeModal,
+        openModal,
+        setModal,
+        setRecipesData,
         setCheckoutData,
         addToCheckout,
         removeFromCheckout,

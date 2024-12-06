@@ -2,7 +2,8 @@ import React from "react";
 import useDataContext from "../Hooks/useDataContext";
 
 const Recipe = ({ recipe }) => {
-  const { checkoutData, addToCheckout, removeFromCheckout } = useDataContext();
+  const { checkoutData, addToCheckout, removeFromCheckout, openModal } =
+    useDataContext();
 
   return (
     <div
@@ -40,7 +41,7 @@ const Recipe = ({ recipe }) => {
             Add to Checkout
           </button>
         )}
-        <button>Details</button>
+        <button onClick={() => openModal(recipe)}>Details</button>
       </div>
     </div>
   );
