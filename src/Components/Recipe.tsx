@@ -1,6 +1,9 @@
 import React from "react";
+import useDataContext from "../Hooks/useDataContext";
 
 const Recipe = ({ recipe }) => {
+  const { checkoutData, addToCheckout, removeFromCheckout } = useDataContext();
+
   return (
     <div
       style={{
@@ -22,7 +25,21 @@ const Recipe = ({ recipe }) => {
         <p>{recipe.difficulty}</p>
       </div>
       <div style={{ marginLeft: "1rem" }}>
-        <button style={{ marginRight: "1rem" }}>Add to Checkout</button>
+        {checkoutData.includes(recipe) ? (
+          <button
+            onClick={() => removeFromCheckout(recipe.id)}
+            style={{ marginRight: "1rem" }}
+          >
+            Remove from Checkout
+          </button>
+        ) : (
+          <button
+            onClick={() => addToCheckout(recipe)}
+            style={{ marginRight: "1rem" }}
+          >
+            Add to Checkout
+          </button>
+        )}
         <button>Details</button>
       </div>
     </div>

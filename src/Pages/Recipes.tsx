@@ -5,8 +5,6 @@ import Recipe from "../Components/Recipe";
 const Recipes = () => {
   const { recipesData } = useDataContext();
 
-  console.log(recipesData);
-
   return (
     <div>
       {recipesData.map((recipe) => (
