@@ -2,7 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 const DataContext = createContext();
 
 const DataContextProvider = ({ children }) => {
-  const [recipesData, setRecipesData] = useState();
+  const [recipesData, setRecipesData] = useState([]);
+  const [checkoutData, setCheckoutData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
