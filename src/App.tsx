@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/" element={<Recipes />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
-      {modal.open && <Modal recipe={modal.data} />}
+      {modal.data && modal.open && <Modal recipe={modal.data} />}
     </div>
   );
 };
