@@ -1,7 +1,8 @@
 import React from "react";
 import useDataContext from "../Hooks/useDataContext";
+import { RecipeProps } from "../Types/dataTypes";
 
-const Recipe = ({ recipe }) => {
+const Recipe: React.FC<RecipeProps> = ({ recipe }) => {
   const { checkoutData, addToCheckout, removeFromCheckout, openModal } =
     useDataContext();
 

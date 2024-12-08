@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 const exampleRecipe = {
   id: 1,
   name: "Classic Margherita Pizza",
@@ -31,19 +33,29 @@ const exampleRecipe = {
   mealType: ["Dinner"],
 };
 
-export type Recipe = typeof exampleRecipe;
+export type RecipeType = typeof exampleRecipe;
 
 export interface DataContextType {
-  recipesData: Recipe[];
-  setRecipesData: React.Dispatch<React.SetStateAction<Recipe[]>>;
+  recipesData: RecipeType[];
+  setRecipesData: React.Dispatch<React.SetStateAction<RecipeType[]>>;
   ///////////////////////////////////////
-  modal: { open: boolean; data: Recipe };
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  modal: { open: boolean; data: RecipeType | null };
+  setModal: React.Dispatch<
+    React.SetStateAction<{ open: boolean; data: null | RecipeType }>
+  >;
   closeModal: () => void;
-  openModal: () => void;
+  openModal: (recipe: RecipeType) => void;
   ///////////////////////////////////////
-  checkoutData: Recipe[];
-  setCheckoutData: React.Dispatch<React.SetStateAction<boolean>>;
-  addToCheckout: (item: Recipe) => void;
+  checkoutData: RecipeType[];
+  setCheckoutData: React.Dispatch<React.SetStateAction<RecipeType[]>>;
+  addToCheckout: (item: RecipeType) => void;
   removeFromCheckout: (id: number) => void;
+}
+
+export interface RecipeProps {
+  recipe: RecipeType;
+}
+
+export interface DataContextProviderProps {
+  children: ReactNode;
 }

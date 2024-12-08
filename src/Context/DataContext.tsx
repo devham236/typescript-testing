@@ -1,29 +1,38 @@
 import React, { createContext, useEffect, useState } from "react";
-const DataContext = createContext();
-import { Recipe } from "../Types/dataTypes";
+import {
+  RecipeType,
+  DataContextType,
+  DataContextProviderProps,
+} from "../Types/dataTypes";
+const DataContext = createContext<DataContextType | undefined>(undefined);
 
-const DataContextProvider = ({ children }) => {
-  const [recipesData, setRecipesData] = useState<Recipe[]>([]);
-  const [checkoutData, setCheckoutData] = useState([]);
-  const [modal, setModal] = useState({
+const DataContextProvider: React.FC<DataContextProviderProps> = ({
+  children,
+}) => {
+  const [recipesData, setRecipesData] = useState<RecipeType[]>([]);
+  const [checkoutData, setCheckoutData] = useState<RecipeType[]>([]);
+  const [modal, setModal] = useState<{
+    open: boolean;
+    data: RecipeType | null;
+  }>({
     open: false,
     data: null,
   });
 
-  const addToCheckout = (recipe) => {
+  const addToCheckout = (recipe: RecipeType) => {
     if (recipe.id) {
       setCheckoutData((prev) => [...prev, recipe]);
     }
   };
 
-  const removeFromCheckout = (id) => {
+  const removeFromCheckout = (id: number) => {
     if (id) {
       const filteredList = checkoutData.filter((item) => item.id !== id);
       setCheckoutData(filteredList);
     }
   };
 
-  const openModal = (recipe) => {
+  const openModal = (recipe: RecipeType) => {
     if (recipe.id) {
       setModal({ open: true, data: recipe });
     }
